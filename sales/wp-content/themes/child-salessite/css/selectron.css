@@ -1,0 +1,186 @@
+.selectron {
+    color: #000000;
+    display: inline-block;
+    font-family: robotoregular;
+    font-size: .875em;
+    max-width: 100%;
+    min-width: 200px;
+    position: relative;
+    width: 100%
+}
+.selectronselect {
+    display: none
+}
+.selectron--disabled {
+    opacity: .5
+}
+.selectron--is-touch .selectron__select {
+    color: #000000;
+    font-family: robotoregular;
+    font-size: .875em;
+    font-size:.875em;
+    height: 100%;
+    font-family:robotoregular;
+    padding: 17px 50px 18px 18px;
+    visibility: visible;
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none
+}
+.selectron__select {
+    background-color: transparent;
+    border: none;
+    height: 0;
+    left: 0;
+    outline: none;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    width: 0
+}
+.selectron--is-touch,
+.selectron__trigger {
+    background-color: #fff;
+    border: none;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    font-size: 14px;
+    height: 50px;
+    line-height: 1;
+    outline: none;
+    overflow: hidden;
+    padding: 10px 50px 10px 13px;
+    position: relative;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%
+}
+.selectron--is-touch::-moz-focus-inner,
+.selectron__trigger::-moz-focus-inner {
+    border: none
+}
+.selectron--is-touch--is-filled,
+.selectron__trigger--is-filled {
+    color: #000000;
+}
+.selectron--is-touch--is-open,
+.selectron__trigger--is-open {
+    border-color: #999;
+    color: #000000;
+}
+.selectron--is-touch:focus,
+.selectron__trigger:focus {
+    border-color: #999
+}
+.selectron--is-touch:before,
+.selectron__trigger:before {
+    content: "";
+    border-bottom: 2px solid #000000;
+    border-left: 2px solid #000000;
+    height: 12px;
+    width: 12px;
+    position: absolute;
+    top: 50%;
+    right: calc(20px - 4px);
+    margin-top: -1px;
+    -webkit-transform: rotate(-45deg) translate(50%, -50%);
+    -ms-transform: rotate(-45deg) translate(50%, -50%);
+    -o-transform: rotate(-45deg) translate(50%, -50%);
+    transform: rotate(-45deg) translate(50%, -50%)
+}
+.selectron__options {
+    background-color: #fff;
+    border-top: none;
+    box-sizing: border-box;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    max-height: 220px;
+    opacity: 0;
+    overflow: auto;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    visibility: hidden;
+    width: 100%;
+    z-index: 50;
+    -webkit-overflow-scrolling: touch
+}
+.selectron__icon{
+    display:inline-block;
+    margin:0 10px 0px 0;
+    max-width:50px;
+    vertical-align:middle
+}
+.selectron__options--is-open {
+    opacity: 1;
+    visibility: visible
+}
+.selectron__options--is-overflowing {
+    border-bottom: none;
+    bottom: 100%;
+    top: auto
+}
+.selectron__option {
+    cursor: pointer;
+    line-height: 1;
+    overflow: hidden;
+    padding: 13px 18px 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-bottom: 1px solid #e3e3e3;
+}
+.selectron__option--optgroup {
+    padding: 13px 18px 14px 28px
+}
+.selectron__option--is-selected {
+    background-color: transparent;
+    color: #000000;
+}
+.selectron__option--is-disabled,
+.selectron__option[data-value=""] {
+    color: #000000;
+
+}
+.selectron__option--is-hovered {
+    background: #f3f3f3;
+    color: #000000 !important;
+    font-family:robotoBold;
+}
+.selectron__option-group {
+    color: #999;
+    cursor: default;
+    padding: 13px 18px 14px
+}
+.selectron--dark {
+    color: #000000;
+}
+.selectron--dark .selectron__trigger {
+    background-color: #363636;
+    border: none;
+    color: #000000
+}
+.selectron--dark .selectron__trigger--is-filled {
+    color: #000000;
+}
+.selectron--dark .selectron__trigger--is-open {
+    background-color: #434343;
+    color: #000000;
+}
+.selectron--dark .selectron__trigger:focus {
+    background-color: #434343
+}
+.selectron--dark .selectron__options {
+    background-color: #363636;
+    border: none
+}
+.selectron--dark .selectron__option[data-value=""] {
+    color: #000000;
+}
+.selectron--dark .selectron__option--is-hovered,
+.selectron--dark .selectron__option:hover {
+    color: #000000;
+}

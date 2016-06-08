@@ -1,0 +1,295 @@
+/*=====LESS Variables=======**/
+/*A+E Brand colors*/
+/*common CSS*/
+/*Font face*/
+/*Header css*/
+/*path*/
+/*media queries*/
+/*==========================================*/
+/*================Microsite Variables==========================*/
+@ms-theme 1:@green
+@ms-theme2:@red
+@green:#235e5d;
+.navbar .navbar-collapse {
+  text-align: center;
+}
+.nav > li > a:focus,
+.nav > li > a:hover {
+  background: none;
+}
+.navbar-fixed-bottom .navbar-collapse,
+.navbar-fixed-top .navbar-collapse {
+  height: auto !important;
+}
+.navbar-fixed-bottom .navbar-collapse,
+.navbar-fixed-top .navbar-collapse {
+  height: auto !important;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #929292;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  font-family: 'robotomedium';
+  text-transform: uppercase;
+}
+.navbar-default .navbar-nav > li > a:hover {
+  color: #fff;
+}
+.navbar-default .navbar-nav > li > a:focus {
+  color: #fff;
+}
+.navbar-default .navbar-nav > li > a.active {
+  color: #fff;
+}
+.navbar-default .navbar-collapse {
+  border-color: #c63728;
+}
+.navbar-collapse.in {
+  overflow-y: initial !important;
+}
+.navbar-fixed-bottom .navbar-collapse,
+.navbar-fixed-top .navbar-collapse {
+  max-height: 600px;
+}
+.navbar-nav > li > a {
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+/*Menu hamburger*/
+.nav-toggle {
+  position: relative;
+  float: right;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.nav-toggle {
+  cursor: pointer;
+  padding: 30px 35px 30px 5px;
+}
+.nav-toggle span,
+.nav-toggle span:before,
+.nav-toggle span:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 3px;
+  width: 30px;
+  background: white;
+  position: absolute;
+  display: block;
+  content: '';
+}
+.nav-toggle span:before {
+  top: -10px;
+}
+.nav-toggle span:after {
+  bottom: -10px;
+}
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+  background-color: #8b0000;
+}
+.nav-toggle span,
+.nav-toggle span:before,
+.nav-toggle span:after {
+  transition: all 500ms ease-in-out;
+}
+.nav-toggle.active span {
+  background-color: transparent;
+}
+.nav-toggle.active span:before,
+.nav-toggle.active span:after {
+  top: 0;
+}
+.nav-toggle.active span:before {
+  transform: rotate(45deg);
+}
+.nav-toggle.active span:after {
+  transform: rotate(-45deg);
+}
+.top-menu .fa {
+  font-size: 13px;
+}
+.top-nav .glyphicon-chevron-down {
+  left: 8px;
+  top: 4px;
+}
+.navbar {
+  margin-bottom: 0;
+}
+/*end*/
+blockquote {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+  border-left: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-family: 'interstatelight';
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote:after {
+  color: #ccc;
+  content: close-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-left: 0.25em;
+  vertical-align: -36px;
+}
+blockquote p {
+  display: inline;
+}
+/*=====end===========*/
+.ms-overlay {
+  background: linear-gradient(to top, #000000, rgba(0, 0, 0, 0));
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.row-no-gutter {
+  margin-right: 0;
+  margin-left: 0;
+}
+.row-no-gutter [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+/*=========Swiper Styling Starts==============*/
+.swiper-container img {
+  width: 100%;
+  height: auto;
+}
+.swiper-button-prev {
+  background: url("http://images.sales.aenetworks.com/site-images/common/swiper_prev.png") no-repeat scroll 0 0;
+  float: left;
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  left: 40px;
+  background-position: right;
+  background-size: contain;
+  height: 50px;
+  z-index: 9;
+}
+.swiper-button-next {
+  background: url("http://images.sales.aenetworks.com/site-images/common/swiper_next.png") no-repeat scroll 0 0;
+  float: right;
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  right: 40px;
+  background-position: left;
+  background-size: contain;
+  height: 50px;
+  z-index: 9;
+}
+.swiper-container-horizontal > .swiper-pagination {
+  bottom: 0;
+}
+.swiper-pagination-bullet {
+  background: #ffffff;
+  opacity: 1;
+}
+.swiper-pagination-bullet-active {
+  background: #6a8f88 !important;
+}
+.swiper-container-horizontal > .swiper-pagination .swiper-pagination-bullet:first-child {
+  margin-left: 0;
+}
+.swiper-pagination {
+  position: relative;
+  padding: 20px;
+}
+.swiper-container-banner {
+  width: 100%;
+  height: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.swiper-pagination-vertical {
+  position: absolute;
+}
+/*=========Swiper Styling  ends==============*/
+.modal .close {
+  color: #fff;
+  font-size: 40px;
+  font-weight: normal;
+  height: 35px;
+  position: absolute;
+  right: 0;
+  top: -64px;
+  width: 32px;
+  opacity: 1;
+}
+.modal-content {
+  border: medium none;
+  border-radius: 0;
+  background: #fff none repeat scroll 0 0;
+}
+.ms-modal-dialog {
+  width: 600px;
+}
+.modal-body {
+  padding: 40px;
+}
+.modal-backdrop.in {
+  opacity: 0.9 !important;
+}
+/*Bootstrap Form Style*/
+.ae-form-group button[disabled],
+.ae-form-group html input[disabled],
+.ae-form-group input[type=text][disabled],
+.ae-form-group input[type=password][disabled] {
+  background: #262626 !important;
+  border: solid 1px #383838;
+  color: #909090;
+  cursor: not-allowed;
+}
+input[type=text]:disabled::-webkit-input-placeholder,
+input[type=password]:disabled::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #909090;
+}
+input[type=text]:disabled:-moz-placeholder,
+input[type=password]:disabled:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #909090;
+}
+input[type=text]:disabled::-moz-placeholder,
+input[type=password]:disabled::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #909090;
+}
+input[type=text]:disabled:-ms-input-placeholder,
+input[type=password]:disabled:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #909090;
+}
+input:focus,
+button:focus,
+.close:focus {
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+.swiper-slide {
+  cursor: pointer;
+}

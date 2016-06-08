@@ -1,0 +1,232 @@
+﻿<Project name="NuGetPackageCleanup" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
+ 
+ <Import Project="$(MSImport)"  Condition="Exists($(MSImport))"/>
+ 
+  <PropertyGroup>
+    	<!--Working or temporary directory-->
+    	<WorkingDir></WorkingDir>
+    	<!--Destination directory i.e folder where Apache is pointing to-->
+    	<DeployDir></DeployDir>
+    	<!--As we are deploy from nuget specify the folder name. It will be like NugetID + Version number-->
+    	<NugetDir></NugetDir>
+    	<!--JS File replace -->
+    	<URL_SOLR></URL_SOLR>
+    	<!--<URL_SOLRForBrowse></URL_SOLRForBrowse>-->
+    	<URL_API></URL_API>
+    	<dbname></dbname>
+    	<dbuser></dbuser>
+    	<dpwd></dpwd>
+    	<dbhost></dbhost>
+    	<dbcharset></dbcharset>
+    	<APIurl></APIurl>
+    	<BaseCDNUrl></BaseCDNUrl>
+    	<ThemeUrl></ThemeUrl>
+    	<SiteUrl></SiteUrl>
+		<Site></Site>
+		<Folder></Folder>
+    	<BaseImgCDNUrl></BaseImgCDNUrl>
+    	<FTPServerHost></FTPServerHost>
+    	<FTPPort></FTPPort>
+    	<FTPUsername></FTPUsername>
+    	<FTPPassword></FTPPassword>
+    	<LocalDirectory></LocalDirectory>
+    	<RemoteDirectory></RemoteDirectory>
+    	<fontUrl></fontUrl>
+    	<ImagePath></ImagePath>
+    	<RelaceFunctionsqa>false</RelaceFunctionsqa>
+    	<functions_php>$(WorkingDir)\wp-content\themes\salessite\functions.php</functions_php>
+    	<MSImport>$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets</MSImport>
+		<!--YUI_path-->
+    	<YUI_path></YUI_path>
+    	<MinifyCssOutput>$(WorkingDir)\wp-content\themes\salessite\css\salseSite.min.css</MinifyCssOutput>  
+    	<appDir>$(WorkingDir)\wp-content\themes\salessite\app</appDir>
+    	<MinifyJsOutput_PreLogginJsFile>$(appDir)\preLogin.min.js</MinifyJsOutput_PreLogginJsFile>  
+    	<MinifyJsOutput_PostLogginJsFile>$(appDir)\postLogin.min.js</MinifyJsOutput_PostLogginJsFile>   
+    
+  </PropertyGroup>
+  
+  
+ <UsingTask TaskName="FtpUploadDirectoryContent" AssemblyFile="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.dll" />  
+ <Target Name="FTPDeployTransfer">
+  <Message Text="$(MSBuildExtensionsPath)" />
+  <FtpUploadDirectoryContent
+  ServerHost="$(FTPServerHost)"
+  Port="$(FTPPort)"
+  Username="$(FTPUsername)"
+  Password="$(FTPPassword)"
+  LocalDirectory="$(LocalDirectory)"
+  RemoteDirectory="$(RemoteDirectory)"
+  Recursive="true"
+        />
+  </Target>
+  
+  <Target Name="RenameHtaccessFile">
+  <Copy SourceFiles="$(WorkingDir)\.htaccess" 
+	                    DestinationFiles="$(WorkingDir)\a.htaccess"  />
+  </Target> 
+  <Target Name="ReplaceHtaccessFile">
+  <Copy DestinationFiles="$(DeployDir)\.htaccess" 
+	                    SourceFiles="$(DeployDir)\a.htaccess"  />
+  </Target>   
+  
+   <Import Project="$(MSImport)"  Condition="Exists($(MSImport))"/>
+		<!--YUI_path-->
+			<UsingTask TaskName="CssCompressorTask" AssemblyFile="$(YUI_path)\Yahoo.Yui.Compressor.Build.MsBuild.dll" />  
+			<UsingTask TaskName="JavaScriptCompressorTask" AssemblyFile="$(YUI_path)\Yahoo.Yui.Compressor.Build.MsBuild.dll" />  
+   
+   <Target Name="Minify"> 
+       <CallTarget Targets="RenameHtaccessFile" />   
+		<MakeDir Directories="$(appDir)" Condition="!Exists($(appDir))" />
+			<!-- $(WorkingDir)\wp-content\themes\salessite\js\services\watchlistservice.js; -->
+                          	 <CreateItem 
+                          	 Include="
+                          		$(WorkingDir)\wp-content\themes\salessite\app\custom.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\swiper.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\js\bootstrapslider.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\js\rzslider.js;		
+                          		$(WorkingDir)\wp-content\themes\salessite\app\app.js;	
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\custompaginationdirective.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\services\baseservice.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\services\watchlistservice.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\services\draftwatchlistservice.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\homecontroller.js;	
+                          		$(WorkingDir)\wp-content\themes\salessite\app\services\swiperservice.js;		
+                          		$(WorkingDir)\wp-content\themes\salessite\app\services\authenticationservices.js;	
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\swiperpressdirective.js;	
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\pressmodalcontroller.js;	
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\contactpresscontroller.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\checklist-model.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\services\seriesdataservice.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\enterdirective.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\changepassword.js"
+                          	 Exclude="" >  
+                                 <Output TaskParameter="Include" ItemName="PreLogginJsFiles"/>  
+                          	 </CreateItem>  
+                          	 
+                          	 <MakeDir Directories="$(appDir)" Condition="!Exists($(appDir))" />
+                          	
+                          	 <CreateItem 
+                          	 Include="
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\searchresultcontroller.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\searchcatalogue.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\services\autocompleteservice.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\services\browseallservice.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\listingcontroller.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\scriptedseriescontroller.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\modelinstancewatchlistcontroller.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\swipergallerydirective.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\gallerymodalcontroller.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\scriptedDetailController.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\formatsdetailcontroller.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\scripteddetailsswiper.js;		
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\myaccountcontroller.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\services\myaccountdetails.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\moviesController.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\services\moviesservice.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\factuallistingcontroller.js;
+                          		$(WorkingDir)\wp-content\themes\salessite\app\controllers\watchlistcontroller.js"
+                          	 Exclude="" >  
+                                 <Output TaskParameter="Include" ItemName="PostLogginJsFiles"/>  
+                               </CreateItem>
+                          	  <CreateItem Include="
+                          		$(WorkingDir)\wp-content\themes\salessite\css\font-awesome.css;
+                          		$(WorkingDir)\wp-content\themes\salessite\css\bootstrapslider.css;
+                          		$(WorkingDir)\wp-content\themes\salessite\css\jquery-ui.css;
+                          		$(WorkingDir)\wp-content\themes\salessite\css\style.css;
+                          		$(WorkingDir)\wp-content\themes\salessite\css\custom.css"
+                          		Exclude="">  
+                                 <Output TaskParameter="Include" ItemName="CssFiles"/>  
+                               </CreateItem> 
+                          	  
+                          	  <CssCompressorTask  
+                                  SourceFiles="@(CssFiles)"  
+                                  DeleteSourceFiles="false"  
+                                  OutputFile="$(MinifyCssOutput)"  	
+                                  CompressionType="Standard"  
+                                  LoggingType="Info"  
+                                  PreserveComments="false"  
+                                  LineBreakPosition="-1"  
+                               /> 
+                            
+                          
+                          	  <JavaScriptCompressorTask  
+                                   SourceFiles="@(PreLogginJsFiles)"  
+                                  DeleteSourceFiles="false"  
+                                  OutputFile="$(MinifyJsOutput_PreLogginJsFile)"  
+                                  CompressionType="Standard"  
+                                  LoggingType="Info"  
+                                  LineBreakPosition="-1"  
+                               />  
+                             
+                              <JavaScriptCompressorTask  
+                                   SourceFiles="@(PostLogginJsFiles)"  
+                                  DeleteSourceFiles="false"  
+                                  OutputFile="$(MinifyJsOutput_PostLogginJsFile)"  
+                                  CompressionType="Standard"  
+                                  LoggingType="Info"  
+                                  LineBreakPosition="-1"  
+                               />
+	                    <Copy SourceFiles="$(functions_php)" 
+	                    DestinationFiles="$(WorkingDir)\wp-content\themes\salessite\functions_bkp_$([System.DateTime]::Now.ToString(yyyyMMdd_HHmm_mmss)).php" 
+	                    Condition="Exists($(functions_php))" />
+	                    <Copy SourceFiles="$(WorkingDir)\wp-content\themes\salessite\functions.min.php" 
+	                    DestinationFiles="$(WorkingDir)\wp-content\themes\salessite\functions.php"/>
+
+	 </Target>
+		
+  <Target Name="Movefiles">
+         <Message Text="Deploying files" />
+	      <ItemGroup>
+	      	<!--Delete existing files-->
+	      	<FilesToDelete Include="$(DeployDir)\**\*"/>
+	      	<!--Identify files to be copied from NuGet package-->
+             <PackageFiles Include="$(WorkingDir)\$(NugetDir)\**\*.*" Exclude="$(WorkingDir)\$(NugetDir)\**\*.nupkg;$(WorkingDir)\$(NugetDir)\**\*.build"/>
+         </ItemGroup>
+	      
+	             <!--Delete old files-->
+	             <Delete Files="@(FilesToDelete)" />
+	             <!--End Delete old files-->
+	             
+	             <!-- Deploy new artifacts -->
+	             <Copy SourceFiles="@(PackageFiles)" DestinationFolder="$(DeployDir)\%(RecursiveDir)"/>
+                 <!-- End Deploy new artifacts -->
+	             
+	             <!--Update constant JS file-->
+	             <FileUpdate Files="$(DeployDir)\wp-content\themes\salessite\app\constant.js" Regex="//\$constants.URL_SOLR\$" ReplacementText="$(URL_SOLR)" />
+	             <!--<FileUpdate Files="$(DeployDir)\wp-content\themes\salessite\app\constant.js" Regex="//\$constants.URL_SOLRForBrowse\$"ReplacementText="$(URL_SOLRForBrowse)"/>-->
+	             <FileUpdate Files="$(DeployDir)\wp-content\themes\salessite\app\constant.js" Regex="//\$constants.URL_API\$" ReplacementText="$(URL_API)" />
+	             <!--End Update JS file-->
+                 
+	                      <!--Update wp-config.php  file-->
+	                      <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$dbname\$" ReplacementText="$(dbname)" />
+	                      <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$dbuser\$" ReplacementText="$(dbuser)" />
+	                      <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$dpwd\$" ReplacementText="$(dpwd)" />
+	                      <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$dbhost\$" ReplacementText="$(dbhost)" />
+                          <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$dbcharset\$" ReplacementText="$(dbcharset)" />
+	                      <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$APIurl\$" ReplacementText="$(APIurl)" />
+	                      <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$BaseCDNUrl\$" ReplacementText="$(BaseCDNUrl)" />
+	                      <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$SiteUrl\$" ReplacementText="$(SiteUrl)" />
+						  <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$Site\$" ReplacementText="$(Site)" />
+						  <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$Folder\$" ReplacementText="$(Folder)" />
+	                      <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$ThemeUrl\$" ReplacementText="$(ThemeUrl)" />
+	                      <FileUpdate Files="$(DeployDir)\constants.php" Regex="//\$BaseImgCDNUrl\$" ReplacementText="$(BaseImgCDNUrl)" />
+	                      <!--End wp-config.php  file-->
+	             
+	             <!--Update CSS and Less  file-->
+	             <FileUpdate Files="$(DeployDir)\wp-content\themes\salessite\less\variables.less" Regex="/\*\@fontUrl\*/" ReplacementText="$(fontUrl)" />
+	             <FileUpdate Files="$(DeployDir)\wp-content\themes\salessite\less\variables.less" Regex="/\*\@ImagePath\*/" ReplacementText="$(ImagePath)" />
+	             <!--End CSS and Less   file-->
+	         <CallTarget Targets="ReplaceHtaccessFile" /> 
+	     <CallTarget Targets="RelaceFunctionsPhp"  Condition="'$(RelaceFunctionsqa)'=='true'"/> 
+  </Target>
+  
+	 <Target Name="RelaceFunctionsPhp"> 
+	 
+	 <Copy SourceFiles="$(DeployDir)\wp-content\themes\salessite\functions.qa.php" DestinationFiles="$(DeployDir)\wp-content\themes\salessite\functions.php" />
+     
+	 </Target>
+	 
+	 <Target Name="GruntLess">
+        <Exec Command="$(DeployDir)\wp-content\themes\salessite\Grunt\grunt less" />
+     </Target>
+</Project>

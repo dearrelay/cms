@@ -1,0 +1,1 @@
+var myApp = angular.module('salessiteApp', ['ng.picturefill', 'custom.bootstrap', 'rzModule','kendo.directives','checklist-model','ui.bootstrap','ngSanitize'])
